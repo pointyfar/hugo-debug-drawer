@@ -1,0 +1,58 @@
+/* Style the buttons that are used to open and close the accordion panel */
+.sidebug-accordion-trigger {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    &.active, &:hover {
+      background-color: #ccc;
+    }
+
+
+    &:after {
+        content: '\25bc';
+        font-size: 13px;
+        color: #777;
+        float: right;
+        margin-left: 5px;
+      }
+      
+      &.active:after {
+        content: "\25b2";
+      }
+
+      &.disabled:after {
+        content: "";
+      }
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+  
+  .sidebug-accordion {
+    background-color: white;
+    overflow:auto;
+    padding: 0 18px;
+    height:auto;
+    max-height:calc(#{$panelheight} - 100px); // still have to hard-code a value!
+    
+    transition-property: all;
+	transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+
+}
+  /* Style the accordion panel. Note: hidden by default */
+  .sidebug-accordion.sidebug-accordion-closed {
+    max-height: 0;
+
+    overflow: hidden;
+    transition-property: all;
+	  transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+
+  }

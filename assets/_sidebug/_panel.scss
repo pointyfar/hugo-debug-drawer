@@ -1,0 +1,68 @@
+.sidebug-trigger{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:calc(#{$panelheight} - 2px);
+	right:40px;
+	background-color:$bugbg;
+	color:#FFF;
+	border-radius:50px 50px 0 0;
+	text-align:center;
+    
+    transition-property: all;
+	transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.sidebug-trigger:hover {
+    background-color: rgba($bugbg, 0.8);
+}
+
+
+.sidebug-icon-wrapper {
+    margin-top: 4px;
+}
+.sidebug-icon {
+    fill: $bugfg;
+    width: 3rem;
+    height: 3rem;
+}
+
+
+
+.sidebug-panel {
+    overflow-y: auto;
+	background: #F6F6F5;
+    position: fixed;
+    bottom: -2px;
+    box-sizing: border-box;
+    border-top: 2px solid $bugbg;
+    -webkit-box-shadow: inset 0px 5px 13px -8px rgba(166,38,57,1);
+       -moz-box-shadow: inset 0px 5px 13px -8px rgba(166,38,57,1);
+            box-shadow: inset 0px 5px 13px -8px rgba(166,38,57,1);
+
+    height: $panelheight;
+    width: 100%;
+	transition-property: all;
+	transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.sidebug-panel-closed {
+    height: 0;
+}
+
+.sidebug-trigger-closed {
+    bottom:0%;
+ 
+}
+
+.sidebug-panel-contents {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebug-table-wrapper {
+ 
+}

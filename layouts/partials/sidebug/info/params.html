@@ -1,0 +1,50 @@
+{{ $options := dict }}
+{{ if (hasPrefix (print .) "Page") }}{{ $options = .Scratch.Get "sidebug-options" }}{{ end }}
+{{ $hidefromdepth := 5 }}
+{{ with $options.hidefromdepth }}{{$hidefromdepth = .}}{{end}}
+<ul>
+    {{ range $k, $v := .Params }}
+    <li>
+        <div class="li-key">{{$k}}</div>
+        {{ template "sidebug-case" (dict "val" $v "from" $k "depth" 0 "hfd" $hidefromdepth ) }}
+    </li>
+    {{ end }}
+</ul>
+
+{{ define "sidebug-case" }}
+    {{ $val := .val }}
+    {{ $from := "" }}
+    {{ $hfd := .hfd }}
+    {{ $depth := add 1 .depth }}
+    {{ with .from }}{{$from = .}}{{end}}
+        
+    
+    {{ if or (reflect.IsMap $val) (reflect.IsSlice $val) }}
+        
+        {{ $otag := cond (reflect.IsSlice $val) "<ol " "<ul " }}
+        {{ $ctag := cond (reflect.IsSlice $val) "</ol>" "</ul>" }}
+        
+        {{/* opening ol/ul */}}
+        {{ print $otag | safeHTML }} class="{{cond (gt $depth .hfd) "sidebug-hfd sidebug-hfd-hide" "sidebug-hfd" }}">
+        
+            {{ range $k, $v := $val }}
+                {{ $notlast := (or (reflect.IsSlice $v) (reflect.IsMap $v) )}}
+                {{ $title := print $from " > " $k }}
+                <li title="{{$title | safeHTMLAttr}}" 
+                    data-sidebugdepth="{{$depth|safeHTMLAttr}}" 
+                    onclick="{{cond ( and ($notlast) (ge $depth $hfd)) "toggleSidebugList(this); event.stopPropagation()" "event.stopPropagation()" | safeJS }}"
+                    >
+                    <div class="li-key {{cond (and ($notlast) (ge $depth $hfd)) "trigger" "" | safeHTMLAttr}} ">
+                        {{cond (in $otag "ol") "[ " ""}}{{$k}}{{cond (in $otag "ol") " ]" ""}}
+                    </div>
+                    {{ template "sidebug-case" (dict "val" $v "from" $title "depth" $depth "hfd" $hfd) }}
+                </li>
+            {{ end }}
+
+        {{/* closing ol/ul */}}
+        {{ print $ctag | safeHTML}}
+
+    {{ else }}
+        <div class="li-val">{{ $val }}</div>
+    {{ end }}
+{{ end }}

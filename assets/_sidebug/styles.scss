@@ -1,0 +1,98 @@
+$panelheight: {{ .sidebugpanelheight | default "300px"}};
+$bugbg: {{ .bugbg | default "#A62639"}};
+$bugfg: {{ .bugcolor | default "#FFFFFF"}};
+
+
+@import 'panel';
+@import 'accordion';
+
+.sidebug {
+   
+    p {
+        margin-top: 0
+    }
+    h1,h2,h3,h4,h5,h6 {
+        font-weight: 300;
+        margin-bottom: 2.0rem;
+        margin-top: 0;
+    }
+    table {
+        font-size: 90%;
+    }
+    td, th{	
+        border-bottom: .1rem solid #e1e1e1;
+        padding: .75rem 1.5rem;
+        text-align: left;
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type:none;
+        position: relative;
+        border: 0px solid red;
+
+        ol {
+          padding: 0;
+          margin: 0 0 0 1rem;
+          list-style-type: none;
+          position: relative;
+          border: 0px solid blue;
+        }
+
+        ul {
+            list-style-type: square;
+            margin: 0 0 0 1rem;
+        }
+        ul li {
+            padding: 0;
+        }
+  
+        ul li ol {
+            border-left: 0px solid cyan;
+        }
+    }
+
+    li {
+        background: rgba($bugbg, .05);
+        margin: 0 0 .2rem 0;
+        border: 1px solid rgba($bugbg, 0);
+
+        &:hover {
+            border: 1px solid $bugbg;
+        }
+        div.li-val {
+            padding-left: .5rem;
+        }
+        div.li-key {
+            font-weight: bold;
+            margin-right: 2rem;
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .sidebug-hfd {
+        display: block;
+        
+        .li-key {
+            text-align: left;
+        &.trigger:after {
+            content: "\25bc";
+            float: right;
+            margin-left: 5px;
+        }
+        &.trigger.active:after {
+            content: "\25b2";
+        }
+        }
+    }
+
+    .sidebug-hfd-hide
+
+    {
+        display: none;
+    }
+
+
+}
