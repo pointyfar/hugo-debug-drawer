@@ -1,5 +1,5 @@
 /* Style the buttons that are used to open and close the accordion panel */
-.sidebug-accordion-trigger {
+.debugdrawer-accordion-trigger {
     background-color: #eee;
     color: #444;
     cursor: pointer;
@@ -34,7 +34,7 @@
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 
   
-  .sidebug-accordion {
+  .debugdrawer-accordion {
     background-color: white;
     overflow:auto;
     padding: 0 18px;
@@ -47,7 +47,7 @@
 
 }
   /* Style the accordion panel. Note: hidden by default */
-  .sidebug-accordion.sidebug-accordion-closed {
+  .debugdrawer-accordion.debugdrawer-accordion-closed {
     max-height: 0;
 
     overflow: hidden;

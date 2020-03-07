@@ -1,4 +1,4 @@
-$panelheight: {{ .sidebugpanelheight | default "300px"}};
+$panelheight: {{ .debugdrawerpanelheight | default "300px"}};
 $bugbg: {{ .bugbg | default "#A62639"}};
 $bugfg: {{ .bugcolor | default "#FFFFFF"}};
 
@@ -6,7 +6,7 @@ $bugfg: {{ .bugcolor | default "#FFFFFF"}};
 @import 'panel';
 @import 'accordion';
 
-.sidebug {
+.debugdrawer {
    
     p {
         margin-top: 0
@@ -72,7 +72,7 @@ $bugfg: {{ .bugcolor | default "#FFFFFF"}};
         }
     }
 
-    .sidebug-hfd {
+    .debugdrawer-hfd {
         display: block;
         
         .li-key {
@@ -88,7 +88,7 @@ $bugfg: {{ .bugcolor | default "#FFFFFF"}};
         }
     }
 
-    .sidebug-hfd-hide
+    .debugdrawer-hfd-hide
 
     {
         display: none;

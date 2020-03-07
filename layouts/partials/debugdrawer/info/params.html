@@ -1,17 +1,17 @@
 {{ $options := dict }}
-{{ if (hasPrefix (print .) "Page") }}{{ $options = .Scratch.Get "sidebug-options" }}{{ end }}
+{{ if (hasPrefix (print .) "Page") }}{{ $options = .Scratch.Get "debugdrawer-options" }}{{ end }}
 {{ $hidefromdepth := 5 }}
 {{ with $options.hidefromdepth }}{{$hidefromdepth = .}}{{end}}
 <ul>
     {{ range $k, $v := .Params }}
     <li>
         <div class="li-key">{{$k}}</div>
-        {{ template "sidebug-case" (dict "val" $v "from" $k "depth" 0 "hfd" $hidefromdepth ) }}
+        {{ template "debugdrawer-case" (dict "val" $v "from" $k "depth" 0 "hfd" $hidefromdepth ) }}
     </li>
     {{ end }}
 </ul>
 
-{{ define "sidebug-case" }}
+{{ define "debugdrawer-case" }}
     {{ $val := .val }}
     {{ $from := "" }}
     {{ $hfd := .hfd }}
@@ -25,19 +25,19 @@
         {{ $ctag := cond (reflect.IsSlice $val) "</ol>" "</ul>" }}
         
         {{/* opening ol/ul */}}
-        {{ print $otag | safeHTML }} class="{{cond (gt $depth .hfd) "sidebug-hfd sidebug-hfd-hide" "sidebug-hfd" }}">
+        {{ print $otag | safeHTML }} class="{{cond (gt $depth .hfd) "debugdrawer-hfd debugdrawer-hfd-hide" "debugdrawer-hfd" }}">
         
             {{ range $k, $v := $val }}
                 {{ $notlast := (or (reflect.IsSlice $v) (reflect.IsMap $v) )}}
                 {{ $title := print $from " > " $k }}
                 <li title="{{$title | safeHTMLAttr}}" 
-                    data-sidebugdepth="{{$depth|safeHTMLAttr}}" 
+                    data-debugdrawerdepth="{{$depth|safeHTMLAttr}}" 
                     onclick="{{cond ( and ($notlast) (ge $depth $hfd)) "toggleSidebugList(this); event.stopPropagation()" "event.stopPropagation()" | safeJS }}"
                     >
                     <div class="li-key {{cond (and ($notlast) (ge $depth $hfd)) "trigger" "" | safeHTMLAttr}} ">
                         {{cond (in $otag "ol") "[ " ""}}{{$k}}{{cond (in $otag "ol") " ]" ""}}
                     </div>
-                    {{ template "sidebug-case" (dict "val" $v "from" $title "depth" $depth "hfd" $hfd) }}
+                    {{ template "debugdrawer-case" (dict "val" $v "from" $title "depth" $depth "hfd" $hfd) }}
                 </li>
             {{ end }}
 

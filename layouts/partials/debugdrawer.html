@@ -1,0 +1,41 @@
+{{ $context := .context }}
+{{ $options := dict }}
+{{ with .options }}
+    {{ $context.Scratch.Set "debugdrawer-options" . }}
+    {{ $options = . }}
+{{ end }}
+
+{{ $context.Scratch.Get "debugdrawer-options" }}
+
+<div class="debugdrawer">
+    {{ $debugdrawer := resources.Get "_debugdrawer/styles.scss" | resources.ExecuteAsTemplate "main.scss"  $options | resources.ToCSS }}
+    {{ $icon := ( resources.Get "_debugdrawer/debugdrawer.svg" ) }}
+    
+    <style>
+    {{ $debugdrawer.Content | safeCSS }}
+    </style>
+    
+    {{ $panelid := print "debugdrawer" (first 5 (now | md5))}}
+    <div onclick="toggleSidebugPanel(this)" class="debugdrawer-trigger debugdrawer-trigger-closed" data-debugdrawerpanel="{{$panelid}}" id="debugdrawertrigger">
+        <div class="debugdrawer-icon-wrapper">
+            {{ replace $icon.Content "<svg" `<svg class="debugdrawer-icon"` | safeHTML }}
+        </div>
+    </div>
+    
+    
+    <div class="debugdrawer-panel debugdrawer-panel-closed"  id="{{$panelid}}">
+        <div class="debugdrawer-panel-contents">
+            {{ partial "debugdrawer/debugtable.html" $context }}
+        </div>
+    </div>
+    
+    
+     
+    {{ $js := resources.Get "_debugdrawer/debugdrawer.js" }}
+    <script src="{{ $js.Permalink | safeURL }}"></script>
+    
+    <script>
+        let b = document.getElementById("debugdrawertrigger");
+        toggleSidebugPanel(b)
+    </script>
+</div>

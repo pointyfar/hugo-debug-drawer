@@ -1,0 +1,20 @@
+<table class="debugdrawer-table">
+    <tbody>
+      {{ partial "debugdrawer/td.html" (  slice "DOT (.)" .) }}
+      {{ $file := ""}}{{ with .File }}{{$file = .}}{{ end }}
+      {{ partial "debugdrawer/td.html" (  slice ".File" $file) }}
+  
+      {{ partial "debugdrawer/td.html" (  slice ".Kind" .Kind) }}
+      {{ partial "debugdrawer/td.html" (  slice ".Type" .Type) }}
+      {{ partial "debugdrawer/td.html" (  slice ".Section" .Section) }}
+      {{ partial "debugdrawer/td.html" (  slice ".Sections" (delimit .Sections ", ")) }}
+      
+      {{ partial "debugdrawer/td.html" (  slice ".Parent" .Parent) }}
+      
+      {{ partial "debugdrawer/td.html" (  slice ".IsPage" .IsPage) }}
+      {{ partial "debugdrawer/td.html" (  slice ".IsNode" .IsNode) }}
+      {{ partial "debugdrawer/td.html" (  slice ".Pages" (delimit .Pages ", ")) }}
+      {{ $hasresources := false }}{{ with .Resources }}{{ $hasresources = true }}{{ end }}
+      {{ partial "debugdrawer/td.html" (  slice ".Resources" $hasresources) }}
+    </tbody>
+</table>

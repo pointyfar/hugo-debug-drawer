@@ -1,0 +1,99 @@
+<div class="debugdrawer-table-wrapper">
+
+<button class="debugdrawer-accordion-trigger" data-debugdrawerpanel="debugdrawer-panel1" onclick="toggleSidebugAccordion(this)">
+  Some Page Variables
+</button>
+<div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel1">
+  {{ partial "debugdrawer/info/pagevars.html" . }}
+</div>
+
+<button class="debugdrawer-accordion-trigger" data-debugdrawerpanel="debugdrawer-panel7" onclick="toggleSidebugAccordion(this)">
+  <code>site</code> Variables
+</button>
+<div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel7">
+  {{ partial "debugdrawer/info/params" site }}
+</div>
+
+<button class="debugdrawer-accordion-trigger" data-debugdrawerpanel="debugdrawer-panel8" onclick="toggleSidebugAccordion(this)">
+  <code>.Page.Params</code>
+</button>
+<div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel8">
+  {{ partial "debugdrawer/info/params" .Page }}
+</div>
+
+<button class="debugdrawer-accordion-trigger" data-debugdrawerpanel="debugdrawer-panel9" onclick="toggleSidebugAccordion(this)">
+  <code>hugo</code> Variables
+</button>
+<div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel9">
+  {{ partial "debugdrawer/info/hugo" . }}
+</div>
+
+{{ with .Parent }}
+  {{ with .Sections }}
+    <button class="debugdrawer-accordion-trigger" data-debugdrawerpanel="debugdrawer-panel2" onclick="toggleSidebugAccordion(this)">
+      Sibling Sections <code>(.Parent.Sections)</code>
+    </button>
+    <div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel2">
+      {{ partial "debugdrawer/info/parent-sections.html" . }}
+    </div>
+    {{ else }}
+  <button class="debugdrawer-accordion-trigger disabled">
+    No Sibling Sections <code>(.Parent.Sections)</code>
+  </button>
+  {{ end }}
+{{ else }}
+  <button class="debugdrawer-accordion-trigger disabled">
+    No Sibling Sections <code>(.Parent.Sections)</code>
+  </button>
+{{ end }}
+
+{{ with .Sections }}
+<button class="debugdrawer-accordion-trigger" data-debugdrawerpanel="debugdrawer-panel3" onclick="toggleSidebugAccordion(this)">
+  Children Sections <code>(.Sections)</code>
+</button>
+<div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel3">
+  {{ partial "debugdrawer/info/sections.html" . }}
+</div>
+{{ else }}
+<button class="debugdrawer-accordion-trigger disabled">
+  No Children Sections <code>(.Sections)</code>
+</button>
+{{ end }}
+
+{{ with .Pages }}
+<button class="debugdrawer-accordion-trigger" data-debugdrawerpanel="debugdrawer-panel4" onclick="toggleSidebugAccordion(this)">
+  Children Pages <code>(.Pages)</code>
+</button>
+<div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel4">
+  {{ partial "debugdrawer/info/pages.html" . }}
+</div>
+{{ else }}
+<button class="debugdrawer-accordion-trigger disabled">
+  No Children Pages <code>(.Pages)</code>
+</button>
+{{ end }}
+    
+{{ if .IsHome }}
+<button class="debugdrawer-accordion-trigger" data-debugdrawerpanel="debugdrawer-panel5" onclick="toggleSidebugAccordion(this)">
+  Regular Pages <code>(.RegularPages)</code>
+</button>
+<div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel5">
+  {{ partial "debugdrawer/info/regularpages.html" . }}
+</div>
+{{ end }}
+
+{{ $hasresources := false }}{{ with .Resources }}{{ $hasresources = true }}{{ end }}
+{{ if $hasresources }}
+<button class="debugdrawer-accordion-trigger" data-debugdrawerpanel="debugdrawer-panel6" onclick="toggleSidebugAccordion(this)">
+  Page Resources
+</button>
+<div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel6">
+  {{ partial "debugdrawer/info/resources.html" . }}
+</div>
+{{ else }}
+<button class="debugdrawer-accordion-trigger disabled">
+No Page Resources
+</button>
+{{ end }}
+
+</div>

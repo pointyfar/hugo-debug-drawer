@@ -1,13 +1,13 @@
 function toggleSidebugPanel(el) {
-    let target = document.getElementById(el.dataset.sidebugpanel)
+    let target = document.getElementById(el.dataset.debugdrawerpanel)
 
-    toggleSidebugClass(target, 'sidebug-panel-closed')
-    toggleSidebugClass(el, 'sidebug-trigger-closed')
+    toggleSidebugClass(target, 'debugdrawer-panel-closed')
+    toggleSidebugClass(el, 'debugdrawer-trigger-closed')
 
 }
 function toggleSidebugAccordion(el) {
-    let target = document.getElementById(el.dataset.sidebugpanel)
-    toggleSidebugClass(target, 'sidebug-accordion-closed')
+    let target = document.getElementById(el.dataset.debugdrawerpanel)
+    toggleSidebugClass(target, 'debugdrawer-accordion-closed')
     toggleSidebugClass(el, 'active')
 }
 
@@ -16,7 +16,7 @@ function toggleSidebugList(el) {
     let target = c[c.length-1];
     console.log(c, target)
     toggleSidebugClass(c[0], 'active')
-    toggleSidebugClass(target, 'sidebug-hfd-hide')
+    toggleSidebugClass(target, 'debugdrawer-hfd-hide')
     
 
 }
