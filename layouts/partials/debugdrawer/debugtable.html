@@ -47,7 +47,7 @@
       Sibling Sections <code>(.Parent.Sections)</code>
     </button>
     <div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel{{$i|safeHTMLAttr}}">
-      {{ partial "debugdrawer/info/parent-sections.html" . }}
+      {{ partial "debugdrawer/info/pages.html" . }}
     </div>
     {{ else }}
   <button class="debugdrawer-accordion-trigger disabled">
@@ -66,7 +66,7 @@
   Children Sections <code>(.Sections)</code>
 </button>
 <div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel{{$i|safeHTMLAttr}}">
-  {{ partial "debugdrawer/info/sections.html" . }}
+  {{ partial "debugdrawer/info/pages.html" . }}
 </div>
 {{ else }}
 <button class="debugdrawer-accordion-trigger disabled">
@@ -94,7 +94,7 @@
   Regular Pages <code>(.RegularPages)</code>
 </button>
 <div class="debugdrawer-accordion debugdrawer-accordion-closed" id="debugdrawer-panel{{$i|safeHTMLAttr}}">
-  {{ partial "debugdrawer/info/regularpages.html" . }}
+  {{ partial "debugdrawer/info/regularpages.html" (sort site.RegularPages ".Section") }}
 </div>
 {{ end }}
 
