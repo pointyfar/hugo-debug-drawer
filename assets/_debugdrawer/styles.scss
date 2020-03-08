@@ -7,6 +7,9 @@ $bugfg: {{ .bugcolor | default "#FFFFFF"}};
 @import 'accordion';
 
 .debugdrawer {
+
+    display: block;
+    width: auto;
    
     p {
         margin-top: 0
