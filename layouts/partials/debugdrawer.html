@@ -33,7 +33,10 @@
     <script src="{{ $js.Permalink | safeURL }}"></script>
     
     <script>
-        let b = document.getElementById("debugdrawertrigger");
-        toggleSidebugPanel(b)
+
+        let ddt = document.getElementById("debugdrawertrigger");
+        {{ with $options.defaultopen }}
+        {{ if . }}toggleSidebugPanel(ddt){{ end }}
+        {{ end }}
     </script>
 </div>
