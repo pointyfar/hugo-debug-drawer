@@ -11,6 +11,7 @@ $bugfg: {{ .bugcolor | default "#FFFFFF"}};
     display: block;
     width: auto;
     z-index: 100;
+    position: absolute;
    
     p {
         margin-top: 0
