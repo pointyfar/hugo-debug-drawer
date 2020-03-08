@@ -5,8 +5,6 @@
     {{ $options = . }}
 {{ end }}
 
-{{ $context.Scratch.Get "debugdrawer-options" }}
-
 <div class="debugdrawer">
     {{ $debugdrawer := resources.Get "_debugdrawer/styles.scss" | resources.ExecuteAsTemplate "main.scss"  $options | resources.ToCSS }}
     {{ $icon := ( resources.Get "_debugdrawer/debugdrawer.svg" ) }}
