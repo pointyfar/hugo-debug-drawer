@@ -1,9 +1,14 @@
 {{ $options := dict }}
-{{ if (hasPrefix (print .) "Page") }}{{ $options = .Scratch.Get "debugdrawer-options" }}{{ end }}
+{{ $params := dict }}
+{{ if (hasPrefix (print .) "Page") }}
+{{ $params = .Params }}
+{{ else }}
+{{ $params = site.Params }}
+{{ end }}
 {{ $hidefromdepth := 5 }}
 {{ with $options.hidefromdepth }}{{$hidefromdepth = .}}{{end}}
 <ul>
-    {{ range $k, $v := .Params }}
+    {{ range $k, $v := $params }}
     <li>
         <div class="li-key">{{$k}}</div>
         {{ template "debugdrawer-case" (dict "val" $v "from" $k "depth" 0 "hfd" $hidefromdepth ) }}
