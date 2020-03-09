@@ -10,7 +10,7 @@
     {{ $icon := ( resources.Get "_debugdrawer/debugdrawer.svg" ) }}
     
     <style>
-    {{ $debugdrawer.Content | safeCSS }}
+        {{ $debugdrawer.Content | safeCSS }}
     </style>
     
     {{ $panelid := print "debugdrawer" (first 5 (now | md5))}}
@@ -23,6 +23,7 @@
     
     <div class="debugdrawer-panel debugdrawer-panel-closed"  id="{{$panelid}}">
         <div class="debugdrawer-panel-contents">
+            {{ with ( .context.Scratch.Get "debugdrawerlayout" )}}<div class="debugdrawer-layout"><h2>Using layout: {{.}}</h2></div>{{ end }}
             {{ partial "debugdrawer/debugtable.html" $context }}
         </div>
     </div>
